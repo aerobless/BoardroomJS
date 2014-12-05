@@ -45,16 +45,16 @@ io.sockets.on('connection', function (socket) {
     logger.log("user connected");
 
     socket.on('mouseDown', function (msg) {
-        logger.log("mouseDown");
         socket.broadcast.emit('mouseDown');
     });
     socket.on('mouseDrag', function (msg) {
-        logger.log(msg);
         socket.broadcast.emit('mouseDrag', msg);
     });
     socket.on('mouseUp', function (msg) {
-        logger.log("mouseUp");
         socket.broadcast.emit('mouseUp');
+    });
+    socket.on('clearCanvas', function (msg) {
+        socket.broadcast.emit('clearCanvas');
     });
 });
 

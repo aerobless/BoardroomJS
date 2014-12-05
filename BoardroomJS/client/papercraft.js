@@ -10,20 +10,11 @@ function onMouseDown(event) {
     mouseDown();
 }
 function mouseDown() {
-    // If we produced a path before, deselect it:
-    /*if (path) {
-        path.selected = false;
-    }*/
-
     path = new Path();
     path.strokeColor = 'black';
-
-    // Select the path, so we can see its segment points:
-   // path.fullySelected = true;
 }
 
 function onMouseDrag(event) {
-    console.log(event);
     mouseDrag(event.point);
     socket.emit("mouseDrag", event.point);
 }
@@ -32,69 +23,52 @@ function mouseDrag(eventPoint) {
     // Every drag event, add a point to the path at the current
     // position of the mouse:
     path.add(eventPoint);
-    console.log(path.index);
 }
 
 function onMouseUp(event) {
-    //socket.emit("mouseUp");
-   // mouseUp();
+    socket.emit("mouseUp");
+    mouseUp();
 }
 
 function mouseUp(event){
     // When the mouse is released, simplify it:
-   // path.simplify();
-
-    // Select the path, so we can see its segments:
-    //path.selected = true;
-
-    //console.log(project.activeLayer);
+    path.smooth();
+    path.simplify();
 }
 
+document.getElementById("clearButton").onclick = function () {
+    socket.emit("clearCanvas");
+    project.clear();
+};
+
 document.getElementById("saveButton").onclick = function () {
-   // alert("save in progress");
-    //var data = path.exportJSON();
-    //download("test.txt", data);
-   // return false;
-   // data = path.exportJSON();
-   // project.activeLayer.remove();
-    //var layer = new Layer();
-
-    var circlePath = new Path.Circle(new Point(50, 50), 25);
-    circlePath.strokeColor = 'black';
-
+    download("img.png", canvas.toDataURL("image/png"));
 };
-/*
-document.getElementById("loadButton").onclick = function () {
-    alert("save in progress");
-     var data = path.exportJSON();
-     download("test.txt", data);
-     return false;
-    path.importJSON(data);
-    var group = new Group();
-    group.addChild(path);
-    //var layer = new Layer();
-};
-*/
 
-function download(filename, text) {
+function download(filename, file) {
     var pom = document.createElement('a');
-    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    pom.setAttribute('download', filename);
+    pom.href = file;
+    pom.download = filename;
     pom.click();
 }
 
 socket.on('mouseDown', function (msg) {
-    console.log("mouseDown");
     mouseDown();
+    view.draw();
 });
 
 socket.on('mouseDrag', function (msg) {
-    console.log("mouseDrag");
     mouseDrag(new Point( msg[1], msg[2] ));
     view.draw();
 });
 
 socket.on('mouseUp', function (msg) {
-    console.log("mouseUp");
     mouseUp();
+    view.draw();
+});
+
+socket.on('clearCanvas', function (msg) {
+    console.log("dddd");
+    project.clear();
+    view.draw();
 });
