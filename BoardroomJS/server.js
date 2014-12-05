@@ -6,9 +6,12 @@ var express = require('express');
 var http = require('http');
 var io = require('socket.io');
 var Logger = require('./logger.js');
+var DrawingManager = require('./drawingManager.js');
 
 var logger = new Logger();
 logger.enableLog(true);
+
+var drawingManager = new DrawingManager();
 
 var allowCrossDomain = function (req, res, next) {
     "use strict";
@@ -26,7 +29,6 @@ app.use(express.cookieParser());
 app.use(express.session({secret: '2234567890QWERTY'}));
 app.use(app.router);
 
-
 //Configure the server to use the client-folder:
 //app.set('client', __dirname+'/client');
 app.configure(function () {
@@ -42,6 +44,7 @@ io = io.listen(app.listen(process.env.PORT || 4730));
 io.sockets.on('connection', function (socket) {
     "use strict";
     socket.emit('message', { action: 'connected' });
+    socket.emit('initalData', drawingManager.getLast());
     logger.log("user connected");
 
     socket.on('mouseDown', function (msg) {
@@ -54,7 +57,11 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('mouseUp');
     });
     socket.on('clearCanvas', function (msg) {
+        drawingManager.clear();
         socket.broadcast.emit('clearCanvas');
+    });
+    socket.on('saveStatus', function (msg) {
+        drawingManager.push(msg);
     });
 });
 

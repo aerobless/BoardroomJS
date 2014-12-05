@@ -28,6 +28,9 @@ function mouseDrag(eventPoint) {
 function onMouseUp(event) {
     socket.emit("mouseUp");
     mouseUp();
+
+    //The client which drew the last line triggers the server to save.
+    save();
 }
 
 function mouseUp(event){
@@ -36,6 +39,12 @@ function mouseUp(event){
     path.simplify();
 }
 
+function save(){
+    var save = project.activeLayer.exportJSON();
+    socket.emit("saveStatus", save);
+}
+
+//Listeners:
 document.getElementById("clearButton").onclick = function () {
     socket.emit("clearCanvas");
     project.clear();
@@ -52,6 +61,8 @@ function download(filename, file) {
     pom.click();
 }
 
+
+//Sockets:
 socket.on('mouseDown', function (msg) {
     mouseDown();
     view.draw();
@@ -68,7 +79,13 @@ socket.on('mouseUp', function (msg) {
 });
 
 socket.on('clearCanvas', function (msg) {
-    console.log("dddd");
     project.clear();
     view.draw();
+});
+
+socket.on('initalData', function (msg) {
+    if (msg !== null) {
+        project.activeLayer.importJSON(msg);
+        view.draw();
+    }
 });
