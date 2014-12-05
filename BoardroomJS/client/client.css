@@ -1,0 +1,5 @@
+.mainbody{
+    top: 40px; /* Header Height */
+    bottom: 20px; /* Footer Height */
+    width: 100%;
+}

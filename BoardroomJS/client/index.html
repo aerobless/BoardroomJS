@@ -1,16 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Theo Winter">
+    <link rel="icon" href="../../favicon.ico">
+
     <title>BoardroomJS</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="client.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
     <script src="jquery/dist/jquery.js"></script>
     <script src="jquery.cookie/jquery.cookie.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="handlebars/handlebars.min.js"></script>
+    <script src="paper/dist/paper-full.min.js"></script>
+
+    <!-- Core Utilities -->
+    <script src="core.js"></script>
+
+    <!-- Papercraft-->
+    <script type="text/paperscript" src="papercraft.js" canvas="myCanvas">
+    </script>
 </head>
 <body>
-    Hello World.
-    <script src="core.js"></script>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">BoardroomJS</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <button type="submit" id="saveButton" class="btn btn-success">Save</button>
+                <button type="submit" id="loadButton" class="btn btn-success">Load</button>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<div >
+    <div>
+        <canvas id="myCanvas" resize></canvas>
+    </div>
+    <hr>
+
+    <footer>
+        <!-- todo: better spacing -->
+        <p>&nbsp;&nbsp;&nbsp; &copy; Theo Winter 2014</p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
