@@ -46,7 +46,7 @@ function save(){
 
 //Listeners:
 document.getElementById("undoButton").onclick = function () {
-    socket.emit("undo");
+   socket.emit("undo");
 };
 
 document.getElementById("clearButton").onclick = function () {
