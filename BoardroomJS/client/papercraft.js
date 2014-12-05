@@ -45,6 +45,10 @@ function save(){
 }
 
 //Listeners:
+document.getElementById("undoButton").onclick = function () {
+    socket.emit("undo");
+};
+
 document.getElementById("clearButton").onclick = function () {
     socket.emit("clearCanvas");
     project.clear();
@@ -88,4 +92,12 @@ socket.on('initalData', function (msg) {
         project.activeLayer.importJSON(msg);
         view.draw();
     }
+});
+
+socket.on('undo', function (msg) {
+    project.clear();
+    if (msg !== null) {
+        project.activeLayer.importJSON(msg);
+    }
+    view.draw();
 });

@@ -63,6 +63,10 @@ io.sockets.on('connection', function (socket) {
     socket.on('saveStatus', function (msg) {
         drawingManager.push(msg);
     });
+    socket.on('undo', function (msg) {
+        drawingManager.pop();
+        io.sockets.emit('undo', drawingManager.getLast());
+    });
 });
 
 io.sockets.on('disconnect', function (socket) {
