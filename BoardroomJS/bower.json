@@ -1,0 +1,24 @@
+{
+  "name": "BoardroomJS",
+  "version": "0.0.0",
+  "homepage": "https://github.com/aerobless/BoardroomJS",
+  "authors": [
+    "TheoWinter <theo.winter@gmail.com>"
+  ],
+  "main": "client/index.html",
+  "license": "Copyright Theo Winter 2014",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.1",
+    "handlebars": "~2.0.0",
+    "jquery.cookie": "~1.4.1"
+  }
+}

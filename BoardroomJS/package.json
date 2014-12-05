@@ -1,0 +1,11 @@
+{
+  "name": "BoardroomJS",
+  "description": "A JS Whiteboard application.",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "bower": "^1.3.12",
+    "express": "3.4.1",
+    "socket.io": "latest"
+  }
+}
