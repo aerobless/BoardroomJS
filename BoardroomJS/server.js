@@ -5,6 +5,9 @@
 var express = require('express');
 var http = require('http');
 var io = require('socket.io');
+var Logger = require('./logger.js');
+
+var logger = new Logger();
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -35,8 +38,14 @@ io = io.listen(app.listen(process.env.PORT || 4730));
 
 io.sockets.on('connection', function (socket) {
     socket.emit('message', { action: 'connected' });
+    logger.log("user connected");
 });
 
 io.sockets.on('disconnect', function (socket) {
     socket.emit('message', { action: 'disconnect' });
+    logger.log("user disconnected");
 });
+
+
+
+logger.log("BoardroomJS-Server sucessfully started..");
