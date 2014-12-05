@@ -2,13 +2,18 @@
  * Created by theowinter on 05/12/14.
  */
 var path;
-var data;
+var data; //debugging / test
+var socket = io();
 
 var textItem = new PointText(new Point(20, 30));
 textItem.fillColor = 'black';
 textItem.content = 'Click and drag to draw a line.';
 
 function onMouseDown(event) {
+    socket.emit("mouseDown");
+    mouseDown();
+}
+function mouseDown() {
     // If we produced a path before, deselect it:
     if (path) {
         path.selected = false;
@@ -22,14 +27,23 @@ function onMouseDown(event) {
 }
 
 function onMouseDrag(event) {
+    mouseDrag(event.point);
+    socket.emit("mouseDrag", event.point);
+}
+
+function mouseDrag(eventPoint) {
     // Every drag event, add a point to the path at the current
     // position of the mouse:
-    path.add(event.point);
-
+    path.add(eventPoint);
     textItem.content = 'Segment count: ' + path.segments.length;
 }
 
 function onMouseUp(event) {
+    socket.emit("mouseUp");
+    mouseUp();
+}
+
+function mouseUp(event){
     var segmentCount = path.segments.length;
 
     // When the mouse is released, simplify it:
@@ -42,7 +56,6 @@ function onMouseUp(event) {
     var difference = segmentCount - newSegmentCount;
     var percentage = 100 - Math.round(newSegmentCount / segmentCount * 100);
     textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
-
 }
 
 document.getElementById("saveButton").onclick = function () {
@@ -72,3 +85,18 @@ function download(filename, text) {
     pom.setAttribute('download', filename);
     pom.click();
 }
+
+socket.on('mouseDown', function (msg) {
+    console.log("mouseDown");
+    mouseDown();
+});
+
+socket.on('mouseDrag', function (msg) {
+    console.log("mouseDrag");
+    mouseDrag(msg);
+});
+
+socket.on('mouseUp', function (msg) {
+    console.log("mouseUp");
+    mouseUp();
+});
