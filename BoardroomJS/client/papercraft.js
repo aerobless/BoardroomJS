@@ -6,12 +6,13 @@ var data; //debugging / test
 var socket = io();
 
 function onMouseDown(event) {
-    sock ");
-    mouseDown();
+    socket.emit("mouseDown", event.point);
+    mouseDown(event.point);
 }
-function mouseDown() {
+function mouseDown(eventPoint) {
     path = new Path();
     path.strokeColor = 'black';
+    path.add(eventPoint);
 }
 
 function onMouseDrag(event) {
@@ -68,12 +69,12 @@ function download(filename, file) {
 
 //Sockets:
 socket.on('mouseDown', function (msg) {
-    mouseDown();
+    mouseDown(new Point(msg[1], msg[2]));
     view.draw();
 });
 
 socket.on('mouseDrag', function (msg) {
-    mouseDrag(new Point( msg[1], msg[2] ));
+    mouseDrag(new Point(msg[1], msg[2]));
     view.draw();
 });
 

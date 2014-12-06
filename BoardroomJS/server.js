@@ -48,7 +48,7 @@ io.sockets.on('connection', function (socket) {
     logger.log("user connected");
 
     socket.on('mouseDown', function (msg) {
-        socket.broadcast.emit('mouseDown');
+        socket.broadcast.emit('mouseDown', msg);
     });
     socket.on('mouseDrag', function (msg) {
         socket.broadcast.emit('mouseDrag', msg);
