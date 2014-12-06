@@ -12,6 +12,7 @@ var logger = new Logger();
 logger.enableLog(true);
 
 var drawingManager = new DrawingManager();
+var pen;
 
 var allowCrossDomain = function (req, res, next) {
     "use strict";
@@ -44,7 +45,8 @@ io = io.listen(app.listen(process.env.PORT || 4730));
 io.sockets.on('connection', function (socket) {
     "use strict";
     socket.emit('message', { action: 'connected' });
-    socket.emit('initalData', drawingManager.getLast());
+    var message = {save: drawingManager.getLast(), pen: pen};
+    socket.emit('initalData', message);
     logger.log("user connected");
 
     socket.on('mouseDown', function (msg) {
@@ -61,7 +63,8 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('clearCanvas');
     });
     socket.on('saveStatus', function (msg) {
-        drawingManager.push(msg);
+        drawingManager.push(msg.save);
+        pen = msg.pen;
     });
     socket.on('undo', function (msg) {
         drawingManager.pop();

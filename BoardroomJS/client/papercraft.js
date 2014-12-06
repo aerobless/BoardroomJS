@@ -49,9 +49,10 @@ function mouseUp() {
     }
 }
 
-function save(){
-    var save = project.activeLayer.exportJSON();
-    socket.emit("saveStatus", save);
+function save() {
+    var save = project.activeLayer.exportJSON(),
+        message = {save: save, pen: pen};
+    socket.emit("saveStatus", message);
 }
 
 function download(filename, file) {
@@ -116,8 +117,9 @@ socket.on('clearCanvas', function (msg) {
 });
 
 socket.on('initalData', function (msg) {
-    if (msg !== null) {
-        project.activeLayer.importJSON(msg);
+    if (typeof msg.save !== "undefined" && typeof msg.pen !== "undefined") {
+        project.activeLayer.importJSON(msg.save);
+        pen = msg.pen;
         view.draw();
     }
 });
