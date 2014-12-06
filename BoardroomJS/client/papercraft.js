@@ -1,17 +1,20 @@
 /**
  * Created by theowinter on 05/12/14.
  */
-var path;
-var data; //debugging / test
 var socket = io();
+
+//Drawing data:
+var path;
+var pen = new Pen('blue', 1, true, true);
 
 function onMouseDown(event) {
     socket.emit("mouseDown", event.point);
     mouseDown(event.point);
 }
+
 function mouseDown(eventPoint) {
     path = new Path();
-    path.strokeColor = 'black';
+    path.strokeColor = pen.color;
     path.add(eventPoint);
 }
 
