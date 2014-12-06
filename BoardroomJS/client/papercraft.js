@@ -6,7 +6,7 @@ var data; //debugging / test
 var socket = io();
 
 function onMouseDown(event) {
-    socket.emit("mouseDown");
+    sock ");
     mouseDown();
 }
 function mouseDown() {
