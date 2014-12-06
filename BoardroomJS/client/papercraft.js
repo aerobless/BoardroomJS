@@ -5,7 +5,7 @@ var socket = io();
 
 //Drawing data:
 var path;
-var pen = new Pen('red', 1, false, false);
+var pen = new Pen('black', 1, true, true);
 
 function onMouseDown(event) {
     var message = {event: event.point, pen: pen};
@@ -16,6 +16,7 @@ function onMouseDown(event) {
 function mouseDown(eventPoint) {
     path = new Path();
     path.strokeColor = pen.color;
+    path.strokeWidth = pen.thickness;
     path.add(eventPoint);
 }
 
@@ -53,6 +54,13 @@ function save(){
     socket.emit("saveStatus", save);
 }
 
+function download(filename, file) {
+    var pom = document.createElement('a');
+    pom.href = file;
+    pom.download = filename;
+    pom.click();
+}
+
 //Listeners:
 document.getElementById("undoButton").onclick = function () {
    socket.emit("undo");
@@ -67,13 +75,23 @@ document.getElementById("saveButton").onclick = function () {
     download("img.png", canvas.toDataURL("image/png"));
 };
 
-function download(filename, file) {
-    var pom = document.createElement('a');
-    pom.href = file;
-    pom.download = filename;
-    pom.click();
-}
-
+document.getElementById("savePenButton").onclick = function () {
+    var color = document.getElementById("penColorPicker").value,
+        stroke,
+        smooth = document.getElementById("optionSettings-0").checked,
+        simplify = document.getElementById("optionSettings-1").checked;
+    if (document.getElementById("thicknessSetting-0").checked) {
+        stroke = 1;
+    } else if (document.getElementById("thicknessSetting-1").checked) {
+        stroke = 2;
+    } else if (document.getElementById("thicknessSetting-2").checked) {
+        stroke = 3;
+    } else if (document.getElementById("thicknessSetting-3").checked) {
+        stroke = 4;
+    }
+    pen = new Pen("#" + color, stroke, smooth, simplify);
+    console.log(pen.toString);
+};
 
 //Sockets:
 socket.on('mouseDown', function (msg) {

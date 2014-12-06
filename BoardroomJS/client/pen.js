@@ -29,7 +29,7 @@ var Pen = (function () {
         smooth: smooth,
         simplify: simplify,
         toString: function () {
-            return "Color: " + color + "  Thickness: " + thickness + "  Smooth: " + smooth + "  Simplify " + simplify;
+            return "Color: " + this.color + "  Thickness: " + this.thickness + "  Smooth: " + this.smooth + "  Simplify " + this.simplify;
         }
     };
     return Constructor;
