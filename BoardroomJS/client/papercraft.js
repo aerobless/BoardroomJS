@@ -78,9 +78,11 @@ document.getElementById("saveButton").onclick = function () {
 
 document.getElementById("savePenButton").onclick = function () {
     var color = document.getElementById("penColorPicker").value,
-        stroke,
+        stroke = document.getElementById("thicknessSettingSpinner").value,
         smooth = document.getElementById("optionSettings-0").checked,
         simplify = document.getElementById("optionSettings-1").checked;
+
+    /*
     if (document.getElementById("thicknessSetting-0").checked) {
         stroke = 1;
     } else if (document.getElementById("thicknessSetting-1").checked) {
@@ -89,7 +91,7 @@ document.getElementById("savePenButton").onclick = function () {
         stroke = 3;
     } else if (document.getElementById("thicknessSetting-3").checked) {
         stroke = 4;
-    }
+    }*/
     pen = new Pen("#" + color, stroke, smooth, simplify);
     console.log(pen.toString);
 };

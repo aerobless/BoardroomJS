@@ -81,59 +81,100 @@
                     Change pen settings
                 </h4>
             </div>
+
             <div class="modal-body">
+                <div class="panel-body form-horizontal payment-form">
+                    <!-- Stroke Picker -->
+                    <h4>Stroke Settings</h4>
 
-                <!-- Color Picker -->
-                <div class="form-group">
-                    <label>Color</label>
-                    <div>
-                        <input type="text" value="000" id="penColorPicker" class="pick-a-color form-control">
-                    </div>
-                </div>
-
-                <!-- Stroke Picker -->
-                <div class="form-group">
-                    <label>Stroke Thickness</label>
-                    <div>
-                        <label class="radio-inline" for="thicknessSetting-0">
-                            <input type="radio" name="thicknessSetting" id="thicknessSetting-0" value="1" checked="checked">
-                            1
-                        </label>
-                        <label class="radio-inline" for="thicknessSetting-1">
-                            <input type="radio" name="thicknessSetting" id="thicknessSetting-1" value="2">
-                            2
-                        </label>
-                        <label class="radio-inline" for="thicknessSetting-2">
-                            <input type="radio" name="thicknessSetting" id="thicknessSetting-2" value="3">
-                            3
-                        </label>
-                        <label class="radio-inline" for="thicknessSetting-3">
-                            <input type="radio" name="thicknessSetting" id="thicknessSetting-3" value="4">
-                            4
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Options Picker -->
-                <div class="form-group">
-                    <label>Options</label>
-                    <div>
-                        <div class="checkbox">
-                            <label for="optionSettings-0">
-                                <input type="checkbox" name="optionSettings" id="optionSettings-0" value="1" checked="checked">
-                                Smooth strokes
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label for="optionSettings-1">
-                                <input type="checkbox" name="optionSettings" id="optionSettings-1" value="2" checked="checked">
-                                Reduce complexity
-                            </label>
+                    <div class='row'>
+                        <label for="penColorPicker" class="col-sm-3 control-label">Color</label>
+                        <div class="col-sm-9">
+                            <input type="text" value="000" id="penColorPicker" class="pick-a-color form-control">
                         </div>
                     </div>
-                </div>
-            </div>
 
+                    <br>
+                    <div class='row'>
+                        <label for="thicknessSpinner" class="col-sm-3 control-label">Thickness</label>
+                        <div class="col-sm-9">
+                            <div class="input-group number-spinner" id="thicknessSpinner">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                </span>
+                                <input type="text" class="form-control text-center" value="1" id="thicknessSettingSpinner">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class='row'>
+                        <label for="transparencySpinner" class="col-sm-3 control-label">Transparency</label>
+                        <div class="col-sm-9">
+                            <div class="input-group number-spinner" id="transparencySpinner">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                    </span>
+                                <input type="text" class="form-control text-center" value="1">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class='row'>
+                        <label for="dropdownMenu1" class="col-sm-3 control-label">Stroke Cap</label>
+                        <div class="col-sm-9">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                    Select <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Round</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Square</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Butt</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <label for="dropdownMenu1" class="col-sm-3 control-label">Style Options</label>
+                        <div class="col-sm-9">
+                            <div class="checkbox">
+                                <label for="optionSettings-0">
+                                    <input type="checkbox" name="performanceSettings" id="optionSettings-0" value="1" checked="checked">
+                                    Dashed strokes
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label for="optionSettings-0">
+                                    <input type="checkbox" name="performanceSettings" id="optionSettings-0" value="1" checked="checked">
+                                    Smooth strokes
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Options Picker -->
+                    <br>
+                    <h4>Performance Options</h4>
+                    <div class='row'>
+                        <div class="col-md-12">
+                            <div class="checkbox">
+                                <label for="optionSettings-1">
+                                    <input type="checkbox" name="performanceSettings" id="optionSettings-1" value="2" checked="checked">
+                                    Reduce complexity
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-success" id="savePenButton" data-dismiss="modal">Save</button>
