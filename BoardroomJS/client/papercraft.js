@@ -5,10 +5,11 @@ var socket = io();
 
 //Drawing data:
 var path;
-var pen = new Pen('blue', 1, true, true);
+var pen = new Pen('red', 1, false, false);
 
 function onMouseDown(event) {
-    socket.emit("mouseDown", event.point);
+    var message = {event: event.point, pen: pen};
+    socket.emit("mouseDown", message);
     mouseDown(event.point);
 }
 
@@ -37,10 +38,14 @@ function onMouseUp(event) {
     save();
 }
 
-function mouseUp(event){
+function mouseUp() {
     // When the mouse is released, simplify it:
-    path.smooth();
-    path.simplify();
+    if (pen.smooth) {
+        path.smooth();
+    }
+    if (pen.simplify) {
+        path.simplify();
+    }
 }
 
 function save(){
@@ -72,7 +77,8 @@ function download(filename, file) {
 
 //Sockets:
 socket.on('mouseDown', function (msg) {
-    mouseDown(new Point(msg[1], msg[2]));
+    pen = msg.pen;
+    mouseDown(new Point(msg.event[1], msg.event[2]));
     view.draw();
 });
 
