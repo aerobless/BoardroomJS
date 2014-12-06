@@ -118,7 +118,7 @@
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                                     </span>
-                                <input type="text" class="form-control text-center" value="1">
+                                <input type="text" class="form-control text-center" value="1" id="transparencySettingSpinner">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                                     </span>
@@ -128,27 +128,32 @@
 
                     <br>
                     <div class='row'>
-                        <label for="dropdownMenu1" class="col-sm-3 control-label">Stroke Cap</label>
+                        <label for="strokeCapDown" class="col-sm-3 control-label">Stroke Cap</label>
                         <div class="col-sm-9">
-                            <div class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                    Select <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Round</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Square</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Butt</a></li>
-                                </ul>
+                            <div id="strokeCapDown">
+                                <label class="radio-inline" for="capSetting-0">
+                                    <input type="radio" name="capSetting" id="capSetting-0" value="1" checked="checked">
+                                    Round
+                                </label>
+                                <label class="radio-inline" for="capSetting-1">
+                                    <input type="radio" name="capSetting" id="capSetting-1" value="2">
+                                    Square
+                                </label>
+                                <label class="radio-inline" for="capSetting-2">
+                                    <input type="radio" name="capSetting" id="capSetting-2" value="3">
+                                    Butt
+                                </label>
                             </div>
                         </div>
                     </div>
 
+                    <br>
                     <div class='row'>
-                        <label for="dropdownMenu1" class="col-sm-3 control-label">Style Options</label>
-                        <div class="col-sm-9">
+                        <label for="styleOptions" class="col-sm-3 control-label">Style Options</label>
+                        <div class="col-sm-9" id="styleOptions">
                             <div class="checkbox">
-                                <label for="optionSettings-0">
-                                    <input type="checkbox" name="performanceSettings" id="optionSettings-0" value="1" checked="checked">
+                                <label for="dashed-option">
+                                    <input type="checkbox" name="performanceSettings" id="dashed-option" value="1">
                                     Dashed strokes
                                 </label>
                             </div>

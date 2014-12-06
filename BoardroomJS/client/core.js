@@ -32,4 +32,9 @@ window.onload = function () {
         }
         btn.closest('.number-spinner').find('input').val(newVal);
     });
+
+    $(".dropdown-menu li a").click(function(){
+        $(this).parents(".input-group-btn").find('.btn').text($(this).text());
+        $(this).parents(".input-group-btn").find('.btn').val($(this).text());
+    });
 };

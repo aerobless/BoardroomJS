@@ -5,7 +5,7 @@ var socket = io();
 
 //Drawing data:
 var path;
-var pen = new Pen('black', 1, true, true);
+var pen = new Pen("black", 1, 100, true, true, false, "Round");
 
 function onMouseDown(event) {
     var message = {event: event.point, pen: pen};
@@ -17,6 +17,13 @@ function mouseDown(eventPoint) {
     path = new Path();
     path.strokeColor = pen.color;
     path.strokeWidth = pen.thickness;
+    path.strokeCap = pen.strokeCap;
+
+    if (pen.dashed) {
+        path.dashArray = [10, 12];
+    } else {
+        path.dashArray = null;
+    }
     path.add(eventPoint);
 }
 
@@ -79,20 +86,20 @@ document.getElementById("saveButton").onclick = function () {
 document.getElementById("savePenButton").onclick = function () {
     var color = document.getElementById("penColorPicker").value,
         stroke = document.getElementById("thicknessSettingSpinner").value,
+        transparency = document.getElementById("transparencySettingSpinner").value,
         smooth = document.getElementById("optionSettings-0").checked,
-        simplify = document.getElementById("optionSettings-1").checked;
+        simplify = document.getElementById("optionSettings-1").checked,
+        dashed = document.getElementById("dashed-option").checked,
+        strokeCap;
 
-    /*
-    if (document.getElementById("thicknessSetting-0").checked) {
-        stroke = 1;
-    } else if (document.getElementById("thicknessSetting-1").checked) {
-        stroke = 2;
-    } else if (document.getElementById("thicknessSetting-2").checked) {
-        stroke = 3;
-    } else if (document.getElementById("thicknessSetting-3").checked) {
-        stroke = 4;
-    }*/
-    pen = new Pen("#" + color, stroke, smooth, simplify);
+    if (document.getElementById("capSetting-0").checked) {
+        strokeCap = "round";
+    } else if (document.getElementById("capSetting-1").checked) {
+        strokeCap = "square";
+    } else if (document.getElementById("capSetting-2").checked) {
+        strokeCap = "butt";
+    }
+    pen = new Pen("#" + color, stroke, transparency, smooth, simplify, dashed, strokeCap);
     console.log(pen.toString);
 };
 
