@@ -12,6 +12,7 @@ var logger = new Logger();
 logger.enableLog(true);
 
 var drawingManager = new DrawingManager();
+var renderManager = new DrawingManager();
 var pen;
 
 var allowCrossDomain = function (req, res, next) {
@@ -65,6 +66,11 @@ io.sockets.on('connection', function (socket) {
     socket.on('saveStatus', function (msg) {
         drawingManager.push(msg.save);
         pen = msg.pen;
+    });
+    socket.on('renderUpdate', function (msg) {
+        renderManager.push(msg);
+        //pen save?
+        socket.broadcast.emit('renderBroadcast', msg);
     });
     socket.on('undo', function (msg) {
         drawingManager.pop();

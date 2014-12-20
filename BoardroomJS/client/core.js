@@ -5,11 +5,11 @@
 window.onload = function () {
     "use strict";
     $(".pick-a-color").pickAColor({
-        showSpectrum            : true,
+        showSpectrum            : false,
         showSavedColors         : true,
         saveColorsPerElement    : false,
         fadeMenuToggle          : true,
-        showHexInput            : true,
+        showHexInput            : false,
         showBasicColors         : true,
         allowBlank              : false,
         inlineDropdown          : true

@@ -7,6 +7,10 @@ var socket = io();
 var path;
 var pen = new Pen("black", 1, 100, true, true, false, "Round");
 
+//Restricting the resolution, ideal for iPad & Beamer-Combo
+$("#canvas").attr("width", "1024px");
+$("#canvas").attr("height", "768px");
+
 function onMouseDown(event) {
     var message = {event: event.point, pen: pen};
     socket.emit("mouseDown", message);
@@ -18,6 +22,7 @@ function mouseDown(eventPoint) {
     path.strokeColor = pen.color;
     path.strokeWidth = pen.thickness;
     path.strokeCap = pen.strokeCap;
+    path.reduce();
 
     if (pen.dashed) {
         path.dashArray = [10, 12];
@@ -54,12 +59,28 @@ function mouseUp() {
     if (pen.simplify) {
         path.simplify();
     }
+
+    //Rendering the canvas down to a pixelated image.
+    renderUpdate();
 }
 
 function save() {
     var save = project.activeLayer.exportJSON(),
         message = {save: save, pen: pen};
     socket.emit("saveStatus", message);
+}
+
+function renderUpdate() {
+    var image = canvas.toDataURL();
+
+    project.clear();
+    view.draw();
+
+    var raster = new Raster({
+        source: image,
+        position: view.center
+    });
+    view.draw();
 }
 
 function download(filename, file) {
@@ -77,6 +98,7 @@ document.getElementById("undoButton").onclick = function () {
 document.getElementById("clearButton").onclick = function () {
     socket.emit("clearCanvas");
     project.clear();
+    renderUpdate();
 };
 
 document.getElementById("saveButton").onclick = function () {
@@ -130,6 +152,7 @@ socket.on('initalData', function (msg) {
         project.activeLayer.importJSON(msg.save);
         pen = msg.pen;
         view.draw();
+        renderUpdate();
     }
 });
 
@@ -137,6 +160,8 @@ socket.on('undo', function (msg) {
     project.clear();
     if (msg !== null) {
         project.activeLayer.importJSON(msg);
+        view.draw();
+        renderUpdate();
     }
     view.draw();
 });
