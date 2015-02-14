@@ -1,7 +1,7 @@
 BoardroomJS
 ===========
 
-Have you ever been in a meeting room wiht just a beamer and no whiteboard? With BoardroomJS you can create your very own cloud-based whiteboard. It's simple to use, just open a web-browser on the device connected to the beamer enter the URL and *BAM!* instant whiteboard. Now you can open the same URL and your smartphone or tablet and draw on the whiteboard in realtime.
+Have you ever been in a meeting room with just a beamer and no whiteboard? With BoardroomJS you can create your very own cloud-based whiteboard. It's simple to use, just open a web-browser on the device connected to the beamer enter the URL and *BAM!* instant whiteboard. Now you can open the same URL and your smartphone or tablet and draw on the whiteboard in realtime.
 Meeting done? Download your sketch as simple png-file on whichever device you want.
 
 ![BoardroomJS drawing](https://raw.githubusercontent.com/aerobless/BoardroomJS/master/Screenshots/plan.png)
