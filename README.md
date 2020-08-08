@@ -6,7 +6,7 @@ Meeting done? Download your sketch as simple png-file on whichever device you wa
 
 ![BoardroomJS drawing](https://raw.githubusercontent.com/aerobless/BoardroomJS/master/Screenshots/plan.png)
 
-##Features:
+## Features:
 
  + Create drawings in real-time across as many devices as you'd like
  + Download drawings as .png file
@@ -19,13 +19,13 @@ Meeting done? Download your sketch as simple png-file on whichever device you wa
 
 ![BoardroomJS pen](https://raw.githubusercontent.com/aerobless/BoardroomJS/master/Screenshots/pen.png)
 
-##Installation:
+## Installation:
 1. Setup NodeJS. Then clone this repo.
 2. Run `npm install`to get all the NodeJS dependencies
 3. Run `bower install`to get all the client-side dependencies, such as bootstrap etc.
 4. Start the application with `node server.js` while inside the application directory.
 
-##License
+## License
 
 > Copyright (c) 2015 Theo Winter
 
